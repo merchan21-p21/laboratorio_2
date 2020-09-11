@@ -1,4 +1,3 @@
-
 /*JUAN PABLO MERCHAN PUENTES, primer punto del laboratorio 2.
 se realiza un algorimo el cual mediante dos puntos x y y va a relaizar el proceso de 
 una ecuacion lineal*/
