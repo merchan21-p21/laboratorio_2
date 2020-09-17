@@ -1,0 +1,120 @@
+/*JUAN PABLO MERCHAN PUENTES, practica de escribir el nombre de uno y cambiarlo por otro.
+utilizando operadores bitwise*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define CAN_PUNTO 10
+
+// funciones prottotipo para el menu
+void request_data (char *vect1, char *vect2,char *flag);
+void compare_words (char *vect1, char *vect2,char flag);
+void chance_words (char *vect1, char *vect2, char flag);
+
+//funcion principal main
+int main()
+{
+	char vect1[CAN_PUNTO];
+	char vect2[CAN_PUNTO];
+	char  flag = 0;
+	int option = 0;
+	
+	do{//estructura do while para la elaboracion de las opciones del menu
+		
+		printf("\n\n\t\t\t\tMENU:\n");
+		printf("\t\t\t1. Ingresar palabras, con un tamaño menor a 10 caracteres.\n");
+		printf("\t\t\t2. Comparar palabras.\n");
+		printf("\t\t\t3. Mostrar palabras .\n");
+		printf("\t\t\t4. Salir.\n");
+		printf("\t\t\tOpcion a escoger: ");
+		scanf("\t\t\t%d", &option);
+		switch(option)
+		{
+			case 1:
+			request_data ( vect1, vect2, &flag);//funcion de pedir datos
+			break;
+			case 2:
+			compare_words(vect1, vect2, flag);//funcion de comparar las palabras
+			break;
+			case 3:
+			chance_words(vect1, vect2, flag);//funcion de cambiar palabras
+			break;
+			case 4:
+			break;
+			default:
+			printf("\n\nla opcion que ingreso es incorrecta\n");
+			break;
+		}
+		
+	}while(option != 4);
+	return 0;	
+}
+
+void request_data (char *vect1, char *vect2, char *flag)
+{
+	*flag = 1;
+	printf("\nIngrese la primera palabra: ");
+	scanf("%s", &(*vect1));
+	printf("ingrese la segunda palabra: ");
+	scanf("%s", &(*vect2));
+		
+}
+
+void  compare_words(char *vect1, char *vect2, char flag)
+{
+	if(flag == 1)
+	{
+		if (*vect1 == *vect2 )
+		{
+			 printf("\nla primera palabra es igual a la segunda."); 
+		}
+		else 
+		{
+			printf("\nLas dos palabras son diferentes.");
+		}
+	}
+	else
+	{
+		printf("\nError no ha ingresado las palabras.");
+	}
+}
+
+void chance_words (char *vect1, char *vect2, char flag)
+{
+	int tam1, tam2, n,v1t=0,v2t=0, vf,v;
+	char nom1[CAN_PUNTO], nom2[CAN_PUNTO];
+	if(flag == 1)
+	{
+		tam1 = strlen(vect1);
+		tam2 = strlen(vect2);	
+		
+		for(int n = 0; n <tam1; n++)
+		{
+			v1t = vect1[n];
+			v2t = vect2[n];
+			if (v1t == v2t)
+			{
+				vf= v1t & v2t;
+				nom1[n]= vf;
+			}
+			else if (v1t == 'u' && v2t == 'h' )
+			{
+				vf = 0;
+				vf = (v1t << 1) & v2t;
+				nom1[n] = vf;
+			}
+			else if(v1t == 'a' && v2t == 'o')
+			{
+				v = v1t | ('x'>>3) ;
+				nom1[n] = v;
+			}
+			
+		}
+		printf ("%s",nom1);
+		
+	}
+	
+	else
+	{
+		printf("\nError no ha ingresado las palabras.");
+	}
+}
